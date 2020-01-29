@@ -1,5 +1,5 @@
 {
-  "name": "bull-board",
+  "name": "@tattlemade/bull-board",
   "description": "Bull queue UI for inspecting jobs",
   "version": "1.0.0-alpha.0",
   "keywords": [
@@ -10,7 +10,8 @@
   ],
   "author": "Vitor Capretz <vitor@rubble.com>",
   "contributors": [
-    "Erik Engervall <erik.engervall@gmail.com>"
+    "Erik Engervall <erik.engervall@gmail.com>",
+    "Denny George <denny@tattle.co.in>" 
   ],
   "main": "dist/index.js",
   "license": "MIT",
