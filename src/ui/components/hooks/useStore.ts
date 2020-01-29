@@ -9,6 +9,7 @@ export const useStore = (basePath: string) => {
     loading: true,
   } as any)
   const [selectedStatuses, setSelectedStatuses] = useState({} as any)
+  const [currentPages, setCurrentPages] = useState(0)
 
   const poll = useRef()
   const stopPolling = () => {
@@ -23,7 +24,7 @@ export const useStore = (basePath: string) => {
     runPolling()
 
     return stopPolling
-  }, [selectedStatuses])
+  }, [selectedStatuses, currentPages])
 
   const runPolling = () => {
     update()
@@ -34,10 +35,18 @@ export const useStore = (basePath: string) => {
       })
   }
 
-  const update = () =>
-    fetch(`${basePath}/queues/?${qs.encode(selectedStatuses)}`)
+  // const update = () =>
+  //   fetch(`${basePath}/queues/?${qs.encode(selectedStatuses)}`)
+  //     .then(res => (res.ok ? res.json() : Promise.reject(res)))
+  //     .then(data => setState({ data, loading: false }))
+
+  const update = () => {
+    return fetch(
+      `${basePath}/queues/?${qs.encode(selectedStatuses)}&page=${currentPages}`,
+    )
       .then(res => (res.ok ? res.json() : Promise.reject(res)))
       .then(data => setState({ data, loading: false }))
+  }
 
   const retryJob = (queueName: string) => (job: { id: string }) => () =>
     fetch(`${basePath}/queues/${queueName}/${job.id}/retry`, {
@@ -67,5 +76,7 @@ export const useStore = (basePath: string) => {
     cleanAllFailed,
     selectedStatuses,
     setSelectedStatuses,
+    currentPages,
+    setCurrentPages,
   }
 }

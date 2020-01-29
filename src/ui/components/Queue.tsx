@@ -264,11 +264,51 @@ export const Queue = ({
   retryJob,
   selectedStatus,
   selectStatus,
+  setCurrentPages,
 }: any) => (
   <section>
     <h3>
       {queue.name}
       {queue.version === 4 && <small> bullmq</small>}
+      <button
+        onClick={() => {
+          setCurrentPages(0)
+        }}
+      >
+        0
+      </button>
+
+      <button
+        onClick={() => {
+          setCurrentPages(1)
+        }}
+      >
+        1
+      </button>
+
+      <button
+        onClick={() => {
+          setCurrentPages(2)
+        }}
+      >
+        2
+      </button>
+
+      <button
+        onClick={() => {
+          setCurrentPages(3)
+        }}
+      >
+        3
+      </button>
+
+      <button
+        onClick={() => {
+          setCurrentPages(4)
+        }}
+      >
+        3
+      </button>
     </h3>
     <div className="menu-list">
       {Object.keys(STATUSES).map(status => (

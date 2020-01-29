@@ -22,6 +22,7 @@ export const App = ({ basePath }: { basePath: string }) => {
     retryAll,
     cleanAllDelayed,
     cleanAllFailed,
+    setCurrentPages,
   } = useStore(basePath)
 
   return (
@@ -44,6 +45,7 @@ export const App = ({ basePath }: { basePath: string }) => {
                 key={queue.name}
                 selectedStatus={selectedStatuses[queue.name]}
                 selectStatus={setSelectedStatuses}
+                setCurrentPages={setCurrentPages}
                 retryJob={retryJob(queue.name)}
                 retryAll={retryAll(queue.name)}
                 cleanAllDelayed={cleanAllDelayed(queue.name)}

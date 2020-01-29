@@ -73,6 +73,11 @@ const getDataForQueues = async (
   bullBoardQueues: BullBoardQueues,
   req: Request,
 ) => {
+  console.log('req.query')
+  console.log(req.query)
+  const pageNum = Number(req.query.page)
+  console.log('pagenum')
+  console.log({ pageNum })
   const query = req.query || {}
   const pairs = Object.entries(bullBoardQueues)
 
@@ -88,7 +93,17 @@ const getDataForQueues = async (
       const counts = await queue.getJobCounts(...statuses)
 
       const status = query[name] === 'latest' ? statuses : query[name]
-      const jobs: (Job | JobMq)[] = await queue.getJobs(status, 0, 10) // eslint-disable-line prettier/prettier
+      let start: number
+      let end: number
+
+      // eslint-disable-next-line prefer-const
+      start = pageNum === undefined ? 0 : pageNum * 10
+      // eslint-disable-next-line prefer-const
+      end = pageNum === undefined ? 10 : pageNum * 10 + 10
+
+      // console.log({ start, end })
+
+      const jobs: (Job | JobMq)[] = await queue.getJobs(status, start, end)
 
       return {
         name,
@@ -103,6 +118,7 @@ const getDataForQueues = async (
   return {
     stats,
     queues,
+    pageNum,
   }
 }
 
