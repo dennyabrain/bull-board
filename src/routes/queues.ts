@@ -73,11 +73,7 @@ const getDataForQueues = async (
   bullBoardQueues: BullBoardQueues,
   req: Request,
 ) => {
-  console.log('req.query')
-  console.log(req.query)
   const pageNum = Number(req.query.page)
-  console.log('pagenum')
-  console.log({ pageNum })
   const query = req.query || {}
   const pairs = Object.entries(bullBoardQueues)
 

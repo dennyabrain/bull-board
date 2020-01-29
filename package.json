@@ -1,5 +1,5 @@
 {
-  "name": "@tattlemade/bull-board",
+  "name": "@tattle-made/bull-board",
   "description": "Bull queue UI for inspecting jobs",
   "version": "1.0.0-alpha.0",
   "keywords": [
